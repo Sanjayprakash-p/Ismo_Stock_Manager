@@ -84,8 +84,8 @@ class opena extends StatelessWidget {
               accountEmail: _usermail(),
               currentAccountPicture: CircleAvatar(
                 // backgroundColor: Colors.blueAccent,
-                child: catchimage(profile.toString()),
-                // backgroundImage: NetworkImage(profile.toString()),
+                // child: catchimage(profile.toString()),
+                backgroundImage: NetworkImage(profile.toString()),
               )),
           listtile(
             context,

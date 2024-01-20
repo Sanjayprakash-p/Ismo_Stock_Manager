@@ -36,19 +36,18 @@ class _RolesState extends State<Roles> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBody: true,
+        // extendBody: true,
         // backgroundColor: screenbackgroundcolor,
         appBar: AppBar(
-          shape: appbarshape(),
+          // shape: appbarshape(),
           // backgroundColor: appbarcolor,
           title: const Text("R O L E S"),
           centerTitle: true,
         ),
         floatingActionButton: FloatingActionButton(
-            backgroundColor: fabbackcolor,
-            splashColor: fabsplashcolor,
             onPressed: () {
               showModalBottomSheet(
+                  showDragHandle: true,
                   isScrollControlled: true,
                   context: context,
                   builder: (BuildContext ctx) {
@@ -87,9 +86,12 @@ class _RolesState extends State<Roles> {
                                 return null;
                               },
                             ),
+                            SizedBox(
+                              height: 20,
+                            ),
                             Center(
-                              child: ElevatedButton(
-                                  style: buttonstyle(),
+                              child: FilledButton(
+                                  // style: buttonstyle(),
                                   onPressed: () async {
                                     if (_formkey3.currentState!.validate()) {
                                       await rolex
@@ -113,7 +115,7 @@ class _RolesState extends State<Roles> {
                                   },
                                   child: Text(
                                     "Create",
-                                    style: buttontextstyle(),
+                                    // style: buttontextstyle(),
                                   )),
                             )
                           ],
@@ -126,9 +128,8 @@ class _RolesState extends State<Roles> {
               /*Navigator.push(context,
                       CupertinoPageRoute(builder: (context) => categoryadd()));*/
             },
-            child: Icon(
+            child: const Icon(
               Icons.add,
-              color: fabiconcolor,
             )),
         body: dele
             ? const Center(
@@ -318,9 +319,6 @@ class _RolesState extends State<Roles> {
                         value: _checkBox,
                         onChanged: (value) {
                           setState(() {
-                            //print('$value');
-                            //print(value);
-
                             _checkBox = value;
                             _checkBox1 = value;
                             _checkBox2 = value;
@@ -552,9 +550,10 @@ class _RolesState extends State<Roles> {
                           checkboxShape: checkboxshape(),
                         )),
                     Center(
-                        child: ElevatedButton(
+                        child: FilledButton(
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: buttonbackgroundcolor),
+                              fixedSize: Size(250, 20),
+                            ),
                             onPressed: () {
                               if (_currentItemSelected == null) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -579,7 +578,7 @@ class _RolesState extends State<Roles> {
                             },
                             child: Text(
                               'Save',
-                              style: buttontextstyle(),
+                              // style: buttontextstyle(),
                             )))
                   ])));
   }

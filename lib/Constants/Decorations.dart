@@ -294,8 +294,8 @@ imagee(documentSnapshot, String nameee, double rad) {
   }
   return CircleAvatar(
     radius: rad,
-    child: catchimage(documentSnapshot),
-    //backgroundImage: NetworkImage(documentSnapshot),
+    // child: catchimage(documentSnapshot),
+    backgroundImage: NetworkImage(documentSnapshot),
   );
 }
 
@@ -341,14 +341,14 @@ authbuttonshape() {
 }
 
 //SnackBar
-snacks(alert) {
+snacks(String alert) {
   return SnackBar(
     showCloseIcon: true,
-    closeIconColor: Colors.white,
-    backgroundColor: Colors.grey.shade900,
+    // closeIconColor: Colors.white,
+    // backgroundColor: Colors.grey.shade900,
     content: Text(
       alert,
-      style: const TextStyle(color: Colors.white),
+      // style: const TextStyle(color: Colors.white),
     ),
     duration: const Duration(seconds: 1),
   );

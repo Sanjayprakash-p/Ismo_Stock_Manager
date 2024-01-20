@@ -58,6 +58,7 @@ class _QRCodeState extends State<QRCode> {
       });
     }
 
+    bool button = false;
     return Scaffold(
         // backgroundColor: Colors.white,
         appBar: AppBar(
@@ -92,6 +93,52 @@ class _QRCodeState extends State<QRCode> {
                 size: 30,
               )),
         ),
+        floatingActionButton: button
+            ? FloatingActionButton.extended(
+
+                // style: buttonstyle(),
+                onPressed: () async {
+                  setState(() {
+                    loadinnn = true;
+                    button = false;
+                  });
+                  await search2();
+                  if (ff.isEmpty) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(snacks("No QR Code to generate"));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        snacks("The QR Code's Have Been Generated"));
+                  }
+                },
+                label: const Text("Generate"))
+            : FloatingActionButton.extended(
+                icon: const Icon(Icons.clear),
+                onPressed: () async {
+                  setState(() {
+                    loadinnn = true;
+                    button = true;
+                  });
+
+                  for (var i in ff) {
+                    i.reference.update({'print': false});
+                  }
+                  setState(() {
+                    loadinnn = false;
+                  });
+                  if (fff = true) {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(snacks("The QR Code's Are Cleared"));
+                    setState(() {
+                      ff.clear();
+
+                      fff = false;
+                      button = false;
+                    });
+                  }
+                },
+                label: const Text("Clear"),
+              ),
         body: loadinnn
             ? const Center(child: CircularProgressIndicator())
             : SingleChildScrollView(
@@ -99,24 +146,6 @@ class _QRCodeState extends State<QRCode> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                    Center(
-                      child: ElevatedButton(
-                          style: buttonstyle(),
-                          onPressed: () async {
-                            setState(() {
-                              loadinnn = true;
-                            });
-                            await search2();
-                            if (ff.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  snacks("No QR Code to generate"));
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  snacks("The QR Code's Have Been Generated"));
-                            }
-                          },
-                          child: const Text("G E N E R A T E")),
-                    ),
                     // SizedBox(
                     //   width: 110,
                     // child: ElevatedButton(
@@ -238,47 +267,6 @@ class _QRCodeState extends State<QRCode> {
                         ),
                       ),
                     ],
-                    // Slidable(closeOnScroll: true,
-                    // endActionPane: ActionPane(
-                    //   extentRatio: 0.2,motion:const StretchMotion(),children: [
-                    //   SlidableAction(onPressed: (context){},icon: Icons.delete_forever,backgroundColor: Colors.red.shade200,)
-                    // ]),
-
-                    //   child: ,),
-
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Center(
-                        child: TextButton(
-                            onPressed: () async {
-                              setState(() {
-                                loadinnn = true;
-                              });
-
-                              for (var i in ff) {
-                                i.reference.update({'print': false});
-                              }
-                              setState(() {
-                                loadinnn = false;
-                              });
-                              if (fff = true) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    snacks("The QR Code's Are Cleared"));
-                                setState(() {
-                                  ff.clear();
-
-                                  fff = false;
-                                });
-                              }
-                            },
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Icon(Icons.refresh),
-                                Text("C L E A R"),
-                              ],
-                            ))),
                   ])));
   }
 }

@@ -56,14 +56,14 @@ class _PinchZoomImageState extends State<PinchZoomImage>
               child: AspectRatio(
                 aspectRatio: 1,
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: catchimage(widget.sanj)
-                    // child: Image.network(
-                    //   widget.sanj,
-                    //   fit: BoxFit.cover,
-                    //   filterQuality: FilterQuality.high,
-                    //),
-                    ),
+                  borderRadius: BorderRadius.circular(10),
+                  // child: catchimage(widget.sanj)
+                  child: Image.network(
+                    widget.sanj,
+                    fit: BoxFit.cover,
+                    filterQuality: FilterQuality.high,
+                  ),
+                ),
               ),
             ),
           ),

@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/settings/app_info.dart';
 import 'package:flutter_application_2/settings/theme.dart';
 import '../../Home/bottomnavigation.dart';
 import '../Authentication/Forgot_Password.dart';
+import '../Authentication/Login_Page.dart';
 import 'profile.dart';
 
 class setting_page extends StatefulWidget {
@@ -214,8 +216,31 @@ class _setting_pageState extends State<setting_page> {
               ),
             ),
           ),
+          GestureDetector(
+            onTap: () => logout(context),
+            child: const ListTile(
+              title: Text(
+                'Logout',
+                style: TextStyle(fontSize: 18),
+              ),
+              trailing: Icon(
+                Icons.chevron_right,
+                size: 35,
+              ),
+            ),
+          ),
         ],
       )),
     );
   }
+}
+
+Future<void> logout(BuildContext context) async {
+  await FirebaseAuth.instance
+      .signOut()
+      .then((value) => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginPage(),
+          )));
 }

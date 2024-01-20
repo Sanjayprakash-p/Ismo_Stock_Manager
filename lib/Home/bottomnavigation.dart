@@ -19,17 +19,9 @@ class navigation extends StatefulWidget {
   State<navigation> createState() => _navigationState();
 }
 
+
 class _navigationState extends State<navigation> {
-  Future<void> logout(BuildContext context) async {
-    const CircularProgressIndicator();
-    await FirebaseAuth.instance
-        .signOut()
-        .then((value) => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginPage(),
-            )));
-  }
+ 
 
   int check = 2;
   final screens = [const Employee(), const SearchPage(), scannerpg()];

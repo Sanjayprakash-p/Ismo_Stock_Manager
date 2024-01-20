@@ -12,10 +12,10 @@ class snackbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SnackBar(
-        backgroundColor: color,
+        // backgroundColor: color,
         content: Text(
-          text,
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400),
-        ));
+      text,
+      // style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400),
+    ));
   }
 }

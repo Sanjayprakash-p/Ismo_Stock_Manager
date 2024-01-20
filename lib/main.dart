@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/Create/Add_Page.dart';
+import 'package:flutter_application_2/admin/permission.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'Home/Employee_Home.dart';
 import 'Home/bottomnavigation.dart';
 import 'authentication/Login_Page.dart';
@@ -26,6 +29,31 @@ var isdrawer = true;
 var auth = FirebaseAuth.instance;
 bool visible = false;
 late DocumentSnapshot docsnap;
+Future<PermissionStatus> _requestlocation() async {
+  var result = await Permission.location.status;
+  if (result.isPermanentlyDenied || result.isDenied) {
+    if (result.isDenied) {
+      result = await Permission.location.request();
+    }
+    if (result.isPermanentlyDenied) {
+      print("Permanently disabled");
+    }
+
+    // if (status.isDenied) {
+    //   _requestlocation();
+    // }
+  }
+  return result;
+}
+
+Future<PermissionStatus> _requestnotification() async {
+  var result = await Permission.notification.status;
+  if (result.isDenied) {
+    result = await Permission.notification.request();
+    _requestnotification();
+  }
+  return result;
+}
 
 class _MyAppState extends State<MyApp> {
   checkIfLogin() async {
@@ -59,16 +87,18 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    super.initState();
+
     checkIfLogin();
     final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-    firebaseMessaging.requestPermission();
+    firebaseMessaging.requestPermission(
+      sound: true,
+    );
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-    super.initState();
   }
 
   static Future<void> _firebaseMessagingBackgroundHandler(
       RemoteMessage message) async {}
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

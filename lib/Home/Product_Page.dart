@@ -244,7 +244,9 @@ class _productpageState extends State<productpage>
                                       },
                                       child: CircleAvatar(
                                         radius: 25,
-                                        child: catchimage(docu['dp']),
+                                        backgroundImage:
+                                            NetworkImage(docu['dp']),
+                                        // child: catchimage(docu['dp']),
                                       ),
                                     ),
                                     title: Text(
